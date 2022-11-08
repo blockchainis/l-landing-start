@@ -1,5 +1,4 @@
 import {
-  SimpleGrid,
   Image,
   Flex,
   Text,
@@ -23,16 +22,10 @@ const Feature = ({ text }) => {
 
 export default function SplitWithImage() {
   return (
-    <Flex maxW={"5xl"} py={12} align={"center"} justify={"center"}>
-      <Box spacing={10} align={"center"} justify={"center"}>
-        <Stack spacing={4}>
+    <Flex maxW={"100%"} py={12} align={"center"} justify={"center"}>
           <Stack
             spacing={4}
-            divider={
-              <StackDivider
-                borderColor={"gray.300"}
-              />
-            }
+            divider={<StackDivider borderColor={"gray.300"} />}
           >
             <Flex justify={"center"}>
               <Image
@@ -70,8 +63,6 @@ export default function SplitWithImage() {
               />
             </Flex >
           </Stack>
-        </Stack>
-      </Box>
     </Flex>
   );
 }

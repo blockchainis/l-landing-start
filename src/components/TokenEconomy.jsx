@@ -1,14 +1,31 @@
 import styled from "@emotion/styled";
-import { Box, Center, Circle, Text, VStack, Flex } from "@chakra-ui/react";
+import { Box, Center, Circle, Text, VStack, Flex,Heading } from "@chakra-ui/react";
 import EconomyTextCircle from "./atoms/EconomyTextCircle";
 export default function TokenEconomy() {
   const radius = 130;
   const marginHori = 70;
   const marginVer = -7;
   return (
-    
-      
-      <Box>
+      <Box marginBottom={150}>
+        <VStack
+      as={Box}
+      textAlign={"center"}
+      spacing={{ base: 8, md: 14 }}
+      py={{ base: 20, md: 36 }}
+    >
+      <Heading
+        fontWeight={600}
+        fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+        lineHeight={"110%"}
+      >
+        A BETTER TOKEN ECONOMY,
+THE GREATER VALUES
+<br />
+      </Heading>
+      <Text color={"gray.500"}>
+        
+      </Text>
+    </VStack>
         <Flex w={"full"} align={"center"} justify={"center"} pos={"relative"}>
       <Box>
         <Box marginY={marginVer}>

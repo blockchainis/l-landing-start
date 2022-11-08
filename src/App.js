@@ -87,7 +87,6 @@ function App() {
       <Features />
       <ThreeTierPricing />
       <TokenEconomy />
-      <HeroTwo />
       <Footer />
     </ChakraProvider>
   );
