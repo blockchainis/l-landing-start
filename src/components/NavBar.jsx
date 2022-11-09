@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -21,10 +22,95 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import logo from "@assets/image/logo.png"
+import Wallet from "./atoms/Wallet";
+import styled from "@emotion/styled";
+import { toast } from "react-toastify"
+import useAuth from "@hooks/useAuth";
+import KaiKasImageUrl from "@assets/image/kaikas.png";
+import * as colors from "@styles/colors";
 
-export default function WithSubnavigation() {
+
+const GrayRoundBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: ${colors.bgSecondary};
+ cursor: pointer;`;
+
+const WalletBox = styled(GrayRoundBox)`
+  background-color: ${colors.textYellow};
+  margin-right: 8px;
+`;
+
+const KaikasImage = styled.img`
+  width: 20px;
+  height: 20px;
+`
+const klaytn = window?.klaytn;
+
+async function isKaikasAvailable() {
+  const klaytn = window?.klaytn;
+  if (!klaytn) {
+    return false;
+  }
+
+  const results = await Promise.all([
+    klaytn._kaikas.isApproved(),
+    klaytn._kaikas.isEnabled(),
+    klaytn._kaikas.isUnlocked(),
+  ]);
+
+
+  return results.every((res) => res);
+}
+
+
+
+export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
+  const {user,setUser} = useAuth();
 
+  async function loginWithKaikas(){
+    if(!klaytn){
+      toast.error("kaikas 설치 필요",{position: toast.POSITION.TOP_CENTER});
+      return;
+    }
+    // toast.success("H  I",{position: toast.POSITION.TOP_CENTER});
+    try{
+      const accounts = await toast.promise(
+        klaytn.enable(),
+        {
+          pending: "Kaikas 지갑 연동 중",
+        },
+        { closeButton: true }
+      );
+      setUser(accounts[0]);
+      localStorage.setItem("_user",accounts[0])
+      toast.success(`${accounts[0].slice(0,13)}...님`)
+    }catch{
+      toast.error("미쳤습니까 휴먼")
+    }
+    
+
+  }
+
+  function handleLogin(){
+    loginWithKaikas();
+  }
+  async function handleDone(){
+    const isAvailable = await isKaikasAvailable();
+    if(isAvailable){
+      toast.success("이미 로그인되었습니다.");
+      return;
+    }
+    toast.warn("다시 로그인 해주세요");
+    setUser("");
+    localStorage.removeItem("_user");
+  }
   return (
     <Box>
       <Flex
@@ -53,14 +139,15 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Image src={logo} h={7} />
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            Logo
+            Dipper
           </Text>
-
+           
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
@@ -72,28 +159,9 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
+          <WalletBox  onClick={user ? handleDone : handleLogin}>
+          {user ? <KaikasImage src ={KaiKasImageUrl}/> : <Wallet/>}
+          </WalletBox>
         </Stack>
       </Flex>
 

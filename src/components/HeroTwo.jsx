@@ -10,7 +10,7 @@ import {
   createIcon,
 } from "@chakra-ui/react";
 
-export default function CallToActionWithAnnotation() {
+export default function HowToMakeMotivation() {
   return (
     <>
       <Container maxW={"3xl"}>
