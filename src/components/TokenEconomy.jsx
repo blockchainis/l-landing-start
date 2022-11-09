@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Center, Circle, Text, VStack, Flex,Heading } from "@chakra-ui/react";
 import EconomyTextCircle from "./atoms/EconomyTextCircle";
 export default function TokenEconomy() {
-  const radius = 130;
+  const radius = 150;
   const marginHori = 70;
   const marginVer = -7;
   return (
@@ -14,12 +14,13 @@ export default function TokenEconomy() {
       py={{ base: 20, md: 36 }}
     >
       <Heading
-        fontWeight={600}
+        fontWeight={400}
         fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-        lineHeight={"110%"}
+        lineHeight={"120%"}
+        marginLeft = {200}
+        marginRight = {200}
       >
-        A BETTER TOKEN ECONOMY,
-THE GREATER VALUES
+        당신이 걸어온 길을 공유하고 보상받을 수 있는 경제 시스템
 <br />
       </Heading>
       <Text color={"gray.500"}>
@@ -31,8 +32,8 @@ THE GREATER VALUES
         <Box marginY={marginVer}>
           <Center>
             <EconomyTextCircle
-              title="System"
-              subTitle="Managing smart contract"
+              title="시스템"
+              subTitle="스마트 컨트렉트로 관리되는 투명한 구조"
               bgColor="green.500"
               radius={radius}
               marginHori={0}
@@ -44,8 +45,8 @@ THE GREATER VALUES
         <Box>
           <Center>
             <EconomyTextCircle
-              title="Reward"
-              subTitle="Token,
+              title="보상"
+              subTitle="토큰,
               NFT"
               bgColor="green.200"
               radius={radius}
@@ -54,10 +55,8 @@ THE GREATER VALUES
               textColor="black"
             />
             <EconomyTextCircle
-              title="Content"
-              subTitle="mukbang,
-              activity,
-              tasty"
+              title="컨텐츠"
+              subTitle="여행, 맛집 탐방, 운동 코스"
               bgColor="green.200"
               radius={radius}
               marginHori={marginHori}
@@ -69,8 +68,8 @@ THE GREATER VALUES
         <Box marginTop={30}>
           <Center>
             <EconomyTextCircle
-              title="Maker"
-              subTitle="Create a route list"
+              title="가이드"
+              subTitle="특별한 루트를 공유해보세요"
               bgColor="green.500"
               radius={radius}
               marginHori={marginHori}
@@ -78,8 +77,8 @@ THE GREATER VALUES
               textColor="white"
             />
             <EconomyTextCircle
-              title="Follower"
-              subTitle="miner & route following"
+              title="팔로워"
+              subTitle="루트를 인증하고 보상을 얻어보세요"
               bgColor="green.500"
               radius={radius}
               marginHori={marginHori}
@@ -91,8 +90,8 @@ THE GREATER VALUES
         <Box marginY={marginVer}>
           <Center>
             <EconomyTextCircle
-              title="Experience"
-              subTitle="unforgettable memories"
+              title="경험"
+              subTitle="뻔하지 않은 새로운 경험을 누려보세요"
               bgColor="green.200"
               radius={radius}
               marginHori={0}
